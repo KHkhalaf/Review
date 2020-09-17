@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:Vmodels="clr-namespace:Review.ViewModels"
+             x:Class="Review.Views.PostsSQL">
+    <ContentPage.BindingContext>
+        <Vmodels:PostViewModel/>
+    </ContentPage.BindingContext>
+
+    <ListView x:Name="listOfPosts"
+              HasUnevenRows="True" 
+              SeparatorVisibility="None">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Grid Padding="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="120"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40*"/>
+                            <ColumnDefinition Width="40*"/>
+                        </Grid.ColumnDefinitions>
+                        <pv:PancakeView  BorderColor="DarkBlue" BorderThickness="5" CornerRadius="15,0,0,15" HasShadow="True" Grid.Row="0" 
+                                             Grid.Column="0" HorizontalOptions="FillAndExpand" 
+                                             VerticalOptions="FillAndExpand" BackgroundGradientAngle="180">
+                            <pv:PancakeView.BackgroundGradientStops>
+                                <pv:GradientStopCollection>
+                                    <pv:GradientStop Color="DarkBlue" Offset="0"/>
+                                    <pv:GradientStop Color="CornflowerBlue" Offset="0.5"/>
+                                    <pv:GradientStop Color="Transparent" Offset="1"/>
+                                </pv:GradientStopCollection>
+                            </pv:PancakeView.BackgroundGradientStops>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20*"/>
+                                    <RowDefinition Height="80*"/>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Text="{Binding userId}" HorizontalTextAlignment="Center" FontAttributes="Bold"/>
+                                <Label Grid.Row="1" Text="{Binding title}"/>
+                            </Grid>
+                        </pv:PancakeView>
+
+                        <pv:PancakeView  BorderColor="Accent" CornerRadius="15,0,0,15" HasShadow="True" Grid.Row="0" 
+                                             Grid.Column="1" HorizontalOptions="FillAndExpand" 
+                                             VerticalOptions="FillAndExpand" BackgroundGradientAngle="180"
+                                             BackgroundGradientStartPoint="0,1" BackgroundGradientEndPoint="0,0">
+                            <pv:PancakeView.BackgroundGradientStops>
+                                <pv:GradientStopCollection>
+                                    <pv:GradientStop Color="DarkBlue" Offset="0"/>
+                                    <pv:GradientStop Color="CornflowerBlue" Offset="1"/>
+                                </pv:GradientStopCollection>
+                            </pv:PancakeView.BackgroundGradientStops>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20*"/>
+                                    <RowDefinition Height="80*"/>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Text="{Binding id}" HorizontalTextAlignment="Center" FontAttributes="Bold"/>
+                                <Label Grid.Row="1" Text="{Binding body}"/>
+                            </Grid>
+                        </pv:PancakeView>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>

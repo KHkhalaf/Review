@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:controls="clr-namespace:Review.Controls"
+             xmlns:Vmodels="clr-namespace:Review.ViewModels"
+             x:Class="Review.Views.AddPost">
+    <StackLayout>
+        <StackLayout Orientation="Vertical"
+                     VerticalOptions="CenterAndExpand"
+                     WidthRequest="400" 
+                     HorizontalOptions="Center">
+            
+            <controls:EntryLabelFloatingView x:Name="Login"
+                                             lblTextTitle="userID" 
+                                             EntryText="{Binding Post.userId, Mode=TwoWay}"
+                                             EntryImage="login"
+                                             EntryKeyboard="Numeric"
+                                             HorizontalOptions="Center" 
+                                             Margin="20,5,20,10" />
+
+            <controls:EntryLabelFloatingView x:Name="Passoword"
+                                             lblTextTitle="ID"
+                                             EntryText="{Binding Post.id, Mode=TwoWay}"
+                                             EntryKeyboard="Numeric"
+                                             EntryImage="lock"
+                                             ImagePassowordSource="visible"
+                                             EntryIsPassword="True" 
+                                             HorizontalOptions="Center" 
+                                             Margin="20,10,20,10" />
+
+            <controls:EntryLabelFloatingView lblTextTitle="Title"
+                                             EntryText="{Binding Post.title, Mode=TwoWay}"
+                                             HorizontalOptions="Center" 
+                                             Margin="20,10,20,10" />
+
+            <controls:EntryLabelFloatingView lblTextTitle="Body"
+                                             IsEnabled="{Binding IsBusy}"
+                                             EntryText="{Binding Post.body, Mode=TwoWay}"
+                                             HorizontalOptions="Center" 
+                                             Margin="20,10,20,10" />
+            <Button Text="Add " BorderColor="Accent" BorderWidth="5" CornerRadius="15"
+                    HeightRequest="60" 
+                    BackgroundColor="#00C0FF" 
+                    TextColor="#EFFBFF" 
+                    Margin="20,10,20,5" 
+                    Clicked="AddPostClicked">
+                <Button.Triggers>
+                            <DataTrigger TargetType="Button"
+                                 Binding="{Binding Source={x:Reference Passoword,Login},Path=EntryText.Length}" Value="0">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                </Button.Triggers>
+                <!--IsEnabled="{Binding Source={x:Reference Passoword,Login},
+                                        Path=EntryText.Length,
+                                        Converter={StaticResource BtnIsEnabled}}">-->
+            </Button>
+            <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="True" Color="CadetBlue" HeightRequest="100"/>
+        </StackLayout>
+    </StackLayout>
+
+</ContentPage>
